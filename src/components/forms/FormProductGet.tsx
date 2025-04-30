@@ -3,17 +3,18 @@
 import { useState } from "react";
 
 interface Props {
-  onSuccess?: () => void; // функція яку викликаємо після успіху
+  onSuccess?: () => void;
 }
 
 const FormProductGet = ({ onSuccess }: Props) => {
   const [productUrl, setProductUrl] = useState("");
   const [productSlug, setProductSlug] = useState("");
+  const [title, setTitle] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!productUrl) {
+    if (!productUrl || !productSlug || !title) {
       alert("Введи URL, ледарю.");
       return;
     }
@@ -29,6 +30,7 @@ const FormProductGet = ({ onSuccess }: Props) => {
         body: JSON.stringify({
           productUrl: productUrl.trim(),
           productSlug: productSlug.trim(),
+          title: title.trim(),
         }),
       });
 
@@ -52,29 +54,41 @@ const FormProductGet = ({ onSuccess }: Props) => {
       className="flex flex-col items-center justify-center space-y-6 bg-gray-50 py-16"
     >
       <div className="w-full max-w-2xl space-y-6 px-4">
-        <div className="flex w-full flex-col gap-4 md:flex-row">
-          <input
-            type="text"
-            name="productUrl"
-            id="productUrl"
-            value={productUrl}
-            onChange={(e) => setProductUrl(e.target.value)}
-            placeholder="Встав сюди XML посилання"
-            className="w-full rounded-lg border-2 border-gray-200 px-4 py-3 text-gray-600 placeholder-gray-400 shadow-sm transition-colors focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none"
-          />
-          <input
-            type="text"
-            name="productSlug"
-            id="productSlug"
-            value={productSlug}
-            onChange={(e) => setProductSlug(e.target.value)}
-            placeholder="Назва групи (slug)"
-            className="w-full rounded-lg border-2 border-gray-200 px-4 py-3 text-gray-600 placeholder-gray-400 shadow-sm transition-colors focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none"
-          />
-
+        <div className="w-full gap-4 md:flex-row">
+          <div className="mb-4">
+            <div className="mb-4 flex items-center gap-4">
+              <input
+                type="text"
+                name="productUrl"
+                id="productUrl"
+                value={productUrl}
+                onChange={(e) => setProductUrl(e.target.value)}
+                placeholder="Встав сюди XML посилання"
+                className="w-full rounded-lg border-2 border-gray-200 px-4 py-3 text-gray-600 placeholder-gray-400 shadow-sm transition-colors focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none"
+              />
+              <input
+                type="text"
+                name="productSlug"
+                id="productSlug"
+                value={productSlug}
+                onChange={(e) => setProductSlug(e.target.value)}
+                placeholder="Назва групи (slug)"
+                className="w-full rounded-lg border-2 border-gray-200 px-4 py-3 text-gray-600 placeholder-gray-400 shadow-sm transition-colors focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none"
+              />
+            </div>
+            <input
+              type="text"
+              name="title"
+              id="title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              placeholder="Заголовок для групи товарів"
+              className="w-full rounded-lg border-2 border-gray-200 px-4 py-3 text-gray-600 placeholder-gray-400 shadow-sm transition-colors focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none"
+            />
+          </div>
           <button
             type="submit"
-            disabled={isSubmitting} // Кнопка блокується тут
+            disabled={isSubmitting}
             className={`w-full transform rounded-lg px-8 py-3 font-medium shadow-md transition-colors duration-200 md:w-auto ${
               isSubmitting
                 ? "cursor-not-allowed bg-gray-400"

@@ -4,10 +4,10 @@ import path from "path";
 
 export async function POST(req: Request) {
   try {
-    const { productUrl, productSlug } = await req.json();
-    console.log("RouteCreate: ", productUrl, productSlug);
+    const { productUrl, productSlug, title } = await req.json();
+    console.log("RouteCreate: ", productUrl, productSlug, title);
 
-    if (!productUrl || !productSlug) {
+    if (!productUrl || !productSlug || !title) {
       return new Response("Missing productUrl", { status: 400 });
     }
 
@@ -43,6 +43,7 @@ export async function POST(req: Request) {
     );
 
     const outputData = {
+      groupTitle: title,
       updatedAt: new Date().toISOString(),
       offers: availableOffers,
     };
