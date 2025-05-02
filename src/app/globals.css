@@ -160,4 +160,43 @@
   .wrap-container {
     @apply px-4;
   }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE та Edge */
+    scrollbar-width: none; /* Firefox */
+  }
 }
+
+/* SLIDER */
+/* Стилі для каруселі мініатюр */
+.product-page__thumbnails .splide__slide {
+  transition: all 0.2s ease;
+  opacity: 0.9; /* Затемнення неактивних слайдів */
+}
+
+.product-page__thumbnails .splide__slide.is-active {
+  opacity: 1; /* Повна видимість активного слайда */
+  border: 2px solid var(--blue-dark) !important; /* Синій контур (blue-500) */
+
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); /* Тінь */
+}
+
+/* Забезпечення коректного розміру для активного слайда */
+.product-page__thumbnails .splide__slide.is-active img {
+  object-fit: cover;
+}
+.product-page .splide__pagination {
+  bottom: -32px;
+}
+.product-page .splide__pagination__page {
+  background: var(--blue-light);
+  @apply size-[6px] sm:size-3;
+}
+.product-page .splide__pagination__page.is-active {
+  background: var(--blue-main);
+  transform: scale(1.3);
+}
+/* END SLIDER */

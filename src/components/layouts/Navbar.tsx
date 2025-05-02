@@ -25,15 +25,19 @@ const Navbar = ({ className = "" }: Props) => {
         <ul className="hidden max-w-1/2 flex-1 items-center justify-between space-x-2 lg:flex">
           <li className="flex items-center">
             <Deliveryicon className="mr-2 w-4" />
-            <span className="text-sm text-white">Доставка від 69 грн</span>
+            <span className="text-xs text-white xl:text-sm">
+              Доставка від 69 грн
+            </span>
           </li>
           <li className="flex items-center">
             <Returnicon className="mr-2 w-4" />
-            <span className="text-sm text-white">14 днів на повернення</span>
+            <span className="text-xs text-white xl:text-sm">
+              14 днів на повернення
+            </span>
           </li>
           <li className="flex items-center">
             <Clockicon className="mr-2 w-4" />
-            <span className="text-sm text-white">
+            <span className="text-xs text-white xl:text-sm">
               У вас за 2-7 робочих днів
             </span>
           </li>
