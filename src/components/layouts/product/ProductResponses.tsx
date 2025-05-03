@@ -36,6 +36,7 @@ const responsesData: IResponsesData[] = [
 const ProductResponses = () => {
   const { respondData } = useResponses();
   const [displayState, setDisplayState] = useState<IResponsesData[]>([]);
+
   useEffect(() => {
     if (respondData.length) {
       setDisplayState([...respondData, ...responsesData]);
@@ -43,13 +44,15 @@ const ProductResponses = () => {
       setDisplayState(responsesData);
     }
   }, [respondData]);
-  console.log("dsdd: ", displayState);
 
   return (
     <>
       <div className="flex">
         <div className="flex-1 space-y-1 md:space-y-4">
-          <h2 id="reviews" className="text-2xl font-semibold md:text-3xl">
+          <h2
+            id="reviews"
+            className="scroll-mt-20 text-2xl font-semibold md:scroll-mt-24 md:text-3xl"
+          >
             Відгуки{" "}
             <b className="text-blue-main font-semibold">
               {displayState.length > 0 ? displayState.length : ""}

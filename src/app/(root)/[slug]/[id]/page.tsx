@@ -17,7 +17,7 @@ const Page = async ({ params }: { params: { slug: string; id: string } }) => {
     <>
       <Navbar />
       <main className="bg-gray-light-ultra space-y-1 pt-8">
-        <ProductPage product={product} />
+        <ProductPage product={product} slug={slug} />
       </main>
     </>
   );

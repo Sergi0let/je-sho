@@ -1,34 +1,29 @@
+import { IRandomProduct, OutputData, ParentProduct } from "@/types";
 import { promises as fs } from "fs";
 import path from "path";
 
 // Інтерфейс для вихідних даних
-interface Variant {
-  title: string;
-  offerId: string;
-  attributes: Record<string, string>;
-  price: number;
-  quantity: number;
-  picture: string;
-  barcode?: string;
-  dimensions?: string;
-  oldprice: number;
-  weight?: string;
-}
+// interface Variant {
+//   title: string;
+//   offerId: string;
+//   attributes: Record<string, string>;
+//   price: number;
+//   quantity: number;
+//   picture: string;
+//   barcode?: string;
+//   dimensions?: string;
+//   oldprice: number;
+//   weight?: string;
+// }
 
-interface ParentProduct {
-  id: string;
-  title: string;
-  description: string;
-  mainPicture: string;
-  variants: Variant[];
-  selectedVariant?: Variant; // Обраний варіант
-}
-
-interface OutputData {
-  groupTitle: string;
-  updatedAt: string;
-  parentProducts: ParentProduct[];
-}
+// interface ParentProduct {
+//   id: string;
+//   title: string;
+//   description: string;
+//   mainPicture: string;
+//   variants: Variant[];
+//   selectedVariant?: Variant; // Обраний варіант
+// }
 
 export async function getOfferAndVariants(
   slug: string,
@@ -36,8 +31,31 @@ export async function getOfferAndVariants(
 ): Promise<ParentProduct | null> {
   try {
     const filePath = path.join(process.cwd(), "public", "data", `${slug}.json`);
+
     const jsonData = await fs.readFile(filePath, "utf-8");
     const data: OutputData = JSON.parse(jsonData);
+
+    const randomProduct = Array.from({ length: 10 }, () =>
+      Math.floor(Math.random() * data.parentProducts.length - 1),
+    );
+
+    const randomProductData: IRandomProduct[] = randomProduct
+      .map((id) => {
+        const offerRandom = data.parentProducts.find(
+          (_, index) => index === id,
+        );
+
+        if (!offerRandom) return undefined;
+
+        return {
+          id: offerRandom.id,
+          title: offerRandom.title,
+          imgUrl: offerRandom.mainPicture[0],
+          price: offerRandom.variants[0].price,
+          oldprice: offerRandom.variants[0].oldprice,
+        };
+      })
+      .filter((p): p is IRandomProduct => p !== undefined);
 
     const offer = data.parentProducts.find((offer) => offer.id === id);
     if (!offer) {
@@ -75,6 +93,7 @@ export async function getOfferAndVariants(
         quantity: variant.quantity || 0,
       })),
       selectedVariant,
+      randomProductData,
     };
   } catch (error) {
     console.error(

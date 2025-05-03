@@ -32,6 +32,14 @@ export interface Variant {
 //   variants: Variant[];
 // }
 
+export interface IRandomProduct {
+  id: string;
+  title: string;
+  imgUrl: string;
+  price: number;
+  oldprice: number;
+}
+
 export interface ParentProduct {
   id: string;
   title: string;
@@ -39,6 +47,7 @@ export interface ParentProduct {
   mainPicture: string;
   variants: Variant[];
   selectedVariant?: Variant;
+  randomProductData: IRandomProduct[];
   availableAttributes?: {
     [key: string]: string[];
   };

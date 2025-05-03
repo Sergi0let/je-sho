@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils";
 import { ReactNode } from "react";
 
 type Props = {
@@ -8,7 +9,10 @@ type Props = {
 const ProductItem = ({ children, className = "" }: Props) => {
   return (
     <div
-      className={`${className} relative space-y-3 bg-white px-4 py-5 md:space-y-4 md:p-7`}
+      className={cn(
+        "relative space-y-3 bg-white px-4 py-5 md:space-y-4 md:p-7",
+        className,
+      )}
     >
       {children}
     </div>

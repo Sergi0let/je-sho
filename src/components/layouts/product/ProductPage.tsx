@@ -18,23 +18,29 @@ import {
   TableCell,
   TableRow,
 } from "@/components/ui/table";
-import { IOrderData, ParentProduct, Variant } from "@/types";
+import { IOrderData, IRandomProduct, ParentProduct, Variant } from "@/types";
 import { useEffect, useState } from "react";
 import ProductBtnVariant from "./ProductBtnVariant";
 import ProductDialog from "./ProductDialog";
 import ProductImgSlider from "./ProductImgSlider";
 import ProductRaiting from "./ProductRaiting";
 import ProductResponses from "./ProductResponses";
+import ProductResponsesSlider from "./ProductResponsesSlider";
 
 interface Props {
   product: ParentProduct;
+  slug: string;
 }
 
-const ProductPage = ({ product }: Props) => {
+const ProductPage = ({ product, slug }: Props) => {
   const [selectedAttributes, setSelectedAttributes] = useState<Record<
     string,
     string
   > | null>(null);
+
+  const [randomProducts, setRandomProducts] = useState<IRandomProduct[] | null>(
+    null,
+  );
 
   const [selectedVariant, setSelectedVariant] = useState<Variant>(
     product.selectedVariant!,
@@ -43,6 +49,12 @@ const ProductPage = ({ product }: Props) => {
   useEffect(() => {
     if (product.selectedVariant) {
       setSelectedAttributes(product.selectedVariant.attributes);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (product.randomProductData) {
+      setRandomProducts(product.randomProductData);
     }
   }, []);
 
@@ -345,10 +357,19 @@ const ProductPage = ({ product }: Props) => {
         </div>
       </Wrapper>
       <Wrapper className="mb-20 px-0 md:px-4">
-        <ProductItem className="rounded-b-[20px]">
+        <ProductItem className="mb-10 rounded-b-[20px] md:mb-20">
           <ResponsesProvider>
             <ProductResponses />
           </ResponsesProvider>
+        </ProductItem>
+        <ProductItem className="bg-transparent p-0 md:p-0">
+          <h2 className="scroll-mt-20 text-2xl font-semibold md:scroll-mt-24 md:text-3xl">
+            Схожі товари зі знижкою
+          </h2>
+
+          {randomProducts ? (
+            <ProductResponsesSlider slug={slug} products={randomProducts} />
+          ) : null}
         </ProductItem>
       </Wrapper>
     </>
