@@ -12,7 +12,17 @@ const nextConfig = {
     ignoreDuringBuilds: true,
   },
   images: {
-    unoptimized: true,
+    unoptimized: true, // Залишаємо, якщо оптимізатор зображень відключений
+    remotePatterns: [
+      {
+        protocol: "https", // Дозволяємо HTTPS
+        hostname: "**", // Дозволяємо всі домени
+      },
+      {
+        protocol: "http", // Дозволяємо HTTP (не рекомендовано для продакшену)
+        hostname: "**", // Дозволяємо всі домени
+      },
+    ],
   },
 };
 

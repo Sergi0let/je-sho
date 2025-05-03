@@ -90,12 +90,12 @@ const ProductResponsesSlider = ({ products = [], className, slug }: Props) => {
         aria-labelledby="product-image-carousel"
       >
         {products.map((product, index) => (
-          <SplideSlide key={index} className="relative bg-white p-3 md:p-5">
+          <SplideSlide key={index} className="relative bg-white">
             <ProductCart slug={slug} {...product} />
           </SplideSlide>
         ))}
       </Splide>
-      <div className="mt-0.5 flex items-center justify-center bg-white py-3">
+      <div className="mt-0.5 flex items-center justify-center bg-white md:py-3">
         <button
           onClick={goPrev}
           className="hover:text-red-main flex size-10 cursor-pointer items-center justify-start rounded-full transition-colors"

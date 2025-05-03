@@ -1,9 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { OutputData, ParentProduct, Variant } from '@/types';
+import { OutputData, ParentProduct, Variant } from "@/types";
 import { XMLParser } from "fast-xml-parser";
 import { promises as fs } from "fs";
 import path from "path";
-
 
 export async function POST(req: Request) {
   try {

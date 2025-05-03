@@ -362,7 +362,7 @@ const ProductPage = ({ product, slug }: Props) => {
             <ProductResponses />
           </ResponsesProvider>
         </ProductItem>
-        <ProductItem className="bg-transparent p-0 md:p-0">
+        <ProductItem className="bg-transparent px-4 py-0 md:p-0">
           <h2 className="scroll-mt-20 text-2xl font-semibold md:scroll-mt-24 md:text-3xl">
             Схожі товари зі знижкою
           </h2>

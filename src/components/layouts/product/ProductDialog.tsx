@@ -104,7 +104,7 @@ const ProductDialog = ({
         </button>
       </DialogTrigger>
       <DialogOverlay className={backdropClass} />
-      <DialogContent className="rounded-2xl border-none p-8 sm:max-w-md">
+      <DialogContent className="dialog-content !w-full rounded-2xl border-none p-8 md:max-w-md">
         <DialogHeader>
           {isGreat ? (
             <ProductModalThanks
