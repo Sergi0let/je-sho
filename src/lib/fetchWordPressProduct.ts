@@ -1,5 +1,4 @@
-const WORDPRESS_BASE_URL =
-  "https://gopulse-ua-gopulse.ens2yx.easypanel.host/wp-json/nt/v1/feed";
+const WORDPRESS_BASE_URL = "https://escho.com.ua/product/wp-json/nt/v1/feed";
 
 interface WordPressProductParams {
   product_id: string;
